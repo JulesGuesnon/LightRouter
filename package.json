@@ -1,6 +1,6 @@
 {
     "name": "re-light-router",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "description": "A light router made for Revery",
     "author": "Jules Guesnon<guesnonj@outlook.fr>",
     "repository": {
@@ -38,5 +38,11 @@
         "@opam/merlin": "*",
         "ocaml": "~4.8.0",
         "refmterr": "*"
-    }
+    },
+    "keywords": [
+        "Reason",
+        "ReasonML",
+        "Revery",
+        "Router"
+    ]
 }
