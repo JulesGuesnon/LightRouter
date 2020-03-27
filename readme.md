@@ -16,7 +16,7 @@ esy add light-router
 
 ## :fire: Usage
 
-**There's a complete example in the [example](/example) folder you can take a look here if you wanna se a full application**
+**There's a complete example in the [example](/example) folder, you can take a look here if you wanna see a full application**
 
 ### Create the router
 
@@ -50,7 +50,7 @@ include  Make(RouterConfig);
 
 ### Use it
 
-Setup the router wherever you want in your application:
+Setup the router where you want in your application:
 
 ```reason
 /* App.re */
@@ -107,7 +107,7 @@ let make = () => {
 
 ### Retrieve the route in a component
 
-If a component need an information in you app, you can use the `useRoute` hook in order to get the current route and the name of it.
+If a component need an information about the route in your app, you can use the `useRoute` hook in order to get the current route and the name of it.
 
 ```reason
 /* About.re */
@@ -128,7 +128,7 @@ let%component make = () => {
 
 ### Retrieve the route outside of a component
 
-you may need the route outside of a component. You can subscribe to the route change and trigger a callback every time the route change:
+you may need the route outside of a component. You can subscribe to the route changes and trigger a callback every time the it changes:
 
 ```reason
 /* NotAComponent.re */
