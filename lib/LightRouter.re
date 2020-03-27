@@ -25,6 +25,10 @@ module Make = (RouterConfig: RouterConfig) => {
     let subscribe = cb => {
       subscriptions := List.append(subscriptions^, [cb]);
     };
+
+    let unsubscribe = cb => {
+      subscriptions := List.filter(c => c != cb, subscriptions^);
+    };
   };
 
   type action =
