@@ -1,0 +1,8 @@
+(executable
+  (name LightRouterExample)
+  (public_name LightRouterExample)
+  (package LightRouter)
+  (preprocess (pps brisk-reconciler.ppx))
+  (libraries Revery LightRouter))
+
+(include_subdirs unqualified)

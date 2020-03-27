@@ -1,0 +1,39 @@
+{
+    "name": "light-router",
+    "version": "0.1.0",
+    "description": "A light router made for Revery",
+    "license": "MIT",
+    "esy": {
+        "build": "dune build -p LightRouter",
+        "buildsInSource": "_build",
+        "install": [
+            "esy-installer LightRouter.install"
+        ],
+        "release": {
+            "bin": [
+                "LightRouterExample"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "esy x Examples",
+        "doc": "esy dune build @doc",
+        "run": "esy x LightRouterExample"
+    },
+    "dependencies": {
+        "revery": "0.30.0",
+        "@opam/dune": "2.4.0",
+        "@esy-ocaml/libffi": "3.2.10"
+    },
+    "resolutions": {
+        "@opam/merlin-extend": "0.4",
+        "esy-cmake": "prometheansacrifice/esy-cmake#2a47392def755",
+        "revery": "julesguesnon/revery#92da7074a5d670428edff6b93746f25b76e229cf",
+        "@esy-ocaml/libffi": "esy-ocaml/libffi#c61127d"
+    },
+    "devDependencies": {
+        "@opam/merlin": "*",
+        "ocaml": "~4.8.0",
+        "refmterr": "*"
+    }
+}

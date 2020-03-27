@@ -1,0 +1,4 @@
+(install
+    (section bin)
+    (package LightRouter)
+    (files Roboto-Regular.ttf))

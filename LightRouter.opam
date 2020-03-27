@@ -1,0 +1,7 @@
+opam-version: "1.2"
+version: "dev"
+maintainer: "hello@julesguesnon.com"
+author: ["Jules Guesnon"]
+build: [
+
+]
