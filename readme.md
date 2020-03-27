@@ -8,10 +8,30 @@ LightRouter is a Router (pretty obvious right?) for [Revery](https://github.com/
 
 ## :wrench: Installation
 
+### Add the module
+
 In the folder of the project, open a terminal and run:
 
 ```bash
-esy add light-router
+esy add re-light-router
+```
+
+### Add it to dune
+
+In your dune file add `LightRouter` in your `libraries`:
+
+```
+(...
+	(libraries ... LightRouter)
+)
+```
+
+### Build
+
+Well now you just have to build:
+
+```bash
+esy build
 ```
 
 ## :fire: Usage
