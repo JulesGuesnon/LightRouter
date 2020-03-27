@@ -1,8 +1,11 @@
 {
-    "name": "light-router",
+    "name": "re-light-router",
     "version": "0.1.0",
     "description": "A light router made for Revery",
-    "license": "MIT",
+    "author": "Jules Guesnon<guesnonj@outlook.fr>",
+    "repository": {
+        "url": "https://github.com/JulesGuesnon/LightRouter"
+    },
     "esy": {
         "build": "dune build -p LightRouter",
         "buildsInSource": "_build",
