@@ -163,3 +163,7 @@ Need to unsubscribe ? You can:
 /* Unsubscribe.re */
 Router.Store.unsubscribe(NotAComponent.callMeOnRouteUpdate)
 ```
+
+## :arrow_right: Todo
+
+- Programmatic navigation
