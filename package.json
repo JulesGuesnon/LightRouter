@@ -31,7 +31,7 @@
     "resolutions": {
         "@opam/merlin-extend": "0.4",
         "esy-cmake": "prometheansacrifice/esy-cmake#2a47392def755",
-        "revery": "julesguesnon/revery#92da7074a5d670428edff6b93746f25b76e229cf",
+        "revery": "revery-ui/revery#3c233048c39451a900a4f6b9a05090c43211a9f2",
         "@esy-ocaml/libffi": "esy-ocaml/libffi#c61127d"
     },
     "devDependencies": {
