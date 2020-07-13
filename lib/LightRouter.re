@@ -3,7 +3,6 @@ open Revery.UI;
 module type RouterConfig = {
   type route;
   let defaultRoute: route;
-  let nameFromRoute: route => string;
 };
 
 module Make = (RouterConfig: RouterConfig) => {
@@ -24,10 +23,10 @@ module Make = (RouterConfig: RouterConfig) => {
 
     let subscribe = cb => {
       subscriptions := List.append(subscriptions^, [cb]);
-    };
 
-    let unsubscribe = cb => {
-      subscriptions := List.filter(c => c != cb, subscriptions^);
+      () => {
+        subscriptions := List.filter(c => c !== cb, subscriptions^);
+      };
     };
   };
 
@@ -50,12 +49,13 @@ module Make = (RouterConfig: RouterConfig) => {
       Hooks.effect(
         OnMount,
         () => {
-          Store.subscribe((_, newRoute) => {dispatch(Route(newRoute))});
-          None;
+          let unsubscribe =
+            Store.subscribe((_, newRoute) => {dispatch(Route(newRoute))});
+          Some(unsubscribe);
         },
       );
 
-    (state.currentRoute, RouterConfig.nameFromRoute(state.currentRoute));
+    (state.currentRoute, Store.updateRoute);
   };
 
   let%component make = (~render, ~style=?, ()) => {
@@ -67,8 +67,9 @@ module Make = (RouterConfig: RouterConfig) => {
         OnMount,
         () => {
           let _ = Store.updateRoute(RouterConfig.defaultRoute);
-          Store.subscribe((_, newRoute) => dispatch(Route(newRoute)));
-          None;
+          Some(
+            Store.subscribe((_, newRoute) => dispatch(Route(newRoute))),
+          );
         },
       );
 
@@ -87,11 +88,16 @@ module Make = (RouterConfig: RouterConfig) => {
     let make = (~children, ~to_, ~onClick=?, ~style=?, ()) => {
       <Components.Clickable
         onClick={_ => {
-          let _ = Store.updateRoute(to_);
           switch (onClick) {
-          | Some(c) => c()
-          | None => ()
-          };
+          | Some(c) =>
+            if (c()) {
+              let _ = Store.updateRoute(to_);
+              ();
+            }
+          | None =>
+            let _ = Store.updateRoute(to_);
+            ();
+          }
         }}
         style={
           switch (style) {
@@ -103,4 +109,7 @@ module Make = (RouterConfig: RouterConfig) => {
       </Components.Clickable>;
     };
   };
+
+  let subscribe = Store.subscribe;
+  let redirect = Store.updateRoute;
 };

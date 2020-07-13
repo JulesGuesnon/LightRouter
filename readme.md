@@ -55,14 +55,6 @@ module  RouterConfig  = {
 
 	/* Set de the default one */
 	let  defaultRoute  =  Home;
-
-	/* Make a function to convert your routes to string */
-	let  nameFromRoute  = route =>
-		switch (route) {
-		|  Home  =>  "Home"
-		|  About  =>  "About"
-		|  Error(_) =>  "Error"
-		};
 };
 
 include  Make(RouterConfig);
@@ -113,7 +105,39 @@ let make = () => {
 	<Router.RouterLink
 		to_=Home
 		/* onClick and style are not required */
-		onClick={() => print_endline("Clicked")}
+		onClick={() => {
+			print_endline("Clicked");
+			true;
+		}}
+		style=Style.[...]
+	>
+		<Text
+			style=...
+			text="Link to home"
+		/>
+	</Router.RouterLink>
+	...
+}
+```
+
+You probably noticed the `true` at the end of the `onClick`. This boolean allows you to prevent or allow the redirection.
+
+```reason
+/* Home.re */
+open Revery;
+open Revery.UI;
+
+
+let make = () => {
+	...
+	<Router.RouterLink
+		to_=Home
+		/* onClick and style are not required */
+		onClick={() => {
+			print_endline("You will never be redirected");
+			/* By returning false, it will prevent the redirection */
+			false;
+		}}
 		style=Style.[...]
 	>
 		<Text
@@ -134,32 +158,48 @@ If a component need an information about the route in your app, you can use the 
 open Revery;
 open Revery.UI;
 
+let stringOfRoute = route => {...}
 
 let%component make = () => {
-	let%hook (_route, name) = Router.useRoute();
+	let%hook (route, redirect) = Router.useRoute();
 	...
 	<Text
 		style=...
-		text={"Current Route: " ++ name}
+		text={"Current Route: " ++ stringOfRoute(name)}
 	/>
+	<Clickable onClick={_ => {
+		print_endline("Programmatic redirection");
+		redirect(Home);
+	}}>
+		<Text
+			style=...
+			text="Click me"
+		>
+	</Clickable>
 	...
 }
 ```
 
 ### Retrieve the route outside of a component
 
-you may need the route outside of a component. You can subscribe to the route changes and trigger a callback every time the it changes:
+You may need the route outside of a component. You can subscribe to the route changes and trigger a callback every time the it changes:
 
 ```reason
 /* NotAComponent.re */
-let callMeOnRouteUpdate = (previousRoute, currentRoute) => ...
+let callMeOnRouteUpdate = (previousRoute, currentRoute) => {...}
 
-Router.Store.subscribe(callMeOnRouteUpdate)
+/* Calling `unsubscribe` wont call anymore callMeOnRouteUpdate */
+let unsubscribe = Router.subscribe(callMeOnRouteUpdate);
 ```
 
-Need to unsubscribe ? You can:
+### Programmatic redirection outside of component
+
+If you need to redirect the user from a function that is not related to components, it's easy:
 
 ```reason
-/* Unsubscribe.re */
-Router.Store.unsubscribe(NotAComponent.callMeOnRouteUpdate)
+/* Somewhere.re */
+
+let myFunction = () => {
+	Router.redirect(Home);
+}
 ```
