@@ -13,7 +13,6 @@ let make = () => {
       alignItems(`Center),
       backgroundColor(Color.hex("#f8f9fc")),
     ]>
-    <Topbar />
     <Router
       style=Style.[
         position(`Absolute),
