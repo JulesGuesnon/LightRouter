@@ -203,7 +203,3 @@ let myFunction = () => {
 	Router.redirect(Home);
 }
 ```
-
-## :arrow_right: Todo
-
-- Programmatic navigation
