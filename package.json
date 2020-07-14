@@ -7,8 +7,7 @@
         "url": "https://github.com/JulesGuesnon/LightRouter"
     },
     "esy": {
-        "build": "dune build -p LightRouter",
-        "buildsInSource": "_build",
+        "build": "dune build -p LightRouter -j4",
         "install": [
             "esy-installer LightRouter.install"
         ],
@@ -19,14 +18,14 @@
         }
     },
     "scripts": {
-        "test": "esy x Examples",
+        "test": "esy '@test' x LightRouterTest.exe",
         "doc": "esy dune build @doc",
         "run": "esy x LightRouterExample"
     },
     "dependencies": {
-        "revery": "0.30.0",
+        "@esy-ocaml/libffi": "3.2.10",
         "@opam/dune": "2.4.0",
-        "@esy-ocaml/libffi": "3.2.10"
+        "revery": "0.30.0"
     },
     "resolutions": {
         "@opam/merlin-extend": "0.4",

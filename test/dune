@@ -1,0 +1,8 @@
+(executable
+  (package LightRouterTest)
+  (name TestRunner)
+  (public_name LightRouterTest.exe)
+  (libraries
+    LightRouterTest.lib
+  )
+)

@@ -1,0 +1,7 @@
+(library
+   (name Tests)
+   (public_name LightRouterTest.lib)
+   (modules (:standard))
+   (ocamlopt_flags -linkall -g)
+   (libraries rely.lib LightRouter)
+)

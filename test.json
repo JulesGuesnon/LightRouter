@@ -1,0 +1,16 @@
+{
+    "source": "./package.json",
+    "scripts": {
+        "run": "esy '@test' x LightRouterTest.exe"
+    },
+    "override": {
+        "build": ["dune build -p LightRouterTest,LightRouter -j4"],
+        "dependencies": {
+            "@reason-native/rely": "*"
+        },
+        "install": [
+            "esy-installer LightRouter.install",
+            "esy-installer LightRouterTest.install"
+        ]
+    }
+}

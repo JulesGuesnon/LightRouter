@@ -75,12 +75,16 @@ module Make:
 
     /**
      * `subscribe` allows you to register a callback everytime the route is updated
+     *
+     * `let unsubscribe = Router.subscribe((oldRoute, currentRoute) => {...})`
      */
     let subscribe:
       ((RouterConfig.route, RouterConfig.route) => unit, unit) => unit;
 
     /**
      * `redirect` allows you to redirect programmaticaly
+     *
+     * `let (previousRoute, currentRoute) = Router.redirect()`
      */
     let redirect:
       RouterConfig.route => (RouterConfig.route, RouterConfig.route);
