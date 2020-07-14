@@ -1,8 +1,17 @@
+/**
+ * You need to create a module that respect the RouterConfig signature to use LightRouter
+ *
+ * `type route`: you probably want it to be a variant, but it can be a polymorphic variant, a string, int...
+ * `let defaultRoute`: The first route on the first render
+ */
 module type RouterConfig = {
   type route;
   let defaultRoute: route;
 };
 
+/**
+ * This is the core of LightRouter, it allows you to create as much Router as you want
+ */
 module Make:
   (RouterConfig: RouterConfig) =>
    {
@@ -20,6 +29,11 @@ module Make:
 
     type state;
 
+    /**
+     * It allows you to get the current route and a function to redirect programmaticaly
+     *
+     * `let%hook (route, redirect) = Router.useRoute();`
+     */
     let useRoute:
       (
         unit,
@@ -42,6 +56,11 @@ module Make:
         Revery_UI.React.Hooks.t('a, 'b),
       );
 
+    /**
+     * RouterLink allows you to have a component to redirect inside this router
+     *
+     * `<RouterLink to_=SomeRoute >...</RouterLink>
+     */
     module RouterLink: {
       let make:
         (
@@ -54,9 +73,15 @@ module Make:
         Brisk_reconciler.element(Revery_UI.React.node);
     };
 
+    /**
+     * `subscribe` allows you to register a callback everytime the route is updated
+     */
     let subscribe:
       ((RouterConfig.route, RouterConfig.route) => unit, unit) => unit;
 
+    /**
+     * `redirect` allows you to redirect programmaticaly
+     */
     let redirect:
       RouterConfig.route => (RouterConfig.route, RouterConfig.route);
   };
