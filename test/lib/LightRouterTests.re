@@ -23,7 +23,7 @@ describe("LightRouter", _ => {
     test("The subscription must be called on route update", ({expect}) => {
       let subscribeMock = ((_, _) => ()) |> Mock.mock2;
 
-      let _un = subscribeMock |> Mock.fn |> Router.subscribe;
+      let unsubscribe = subscribeMock |> Mock.fn |> Router.subscribe;
 
       Router.redirect(Hello) |> ignore;
 
@@ -34,6 +34,13 @@ describe("LightRouter", _ => {
       Router.redirect(Hello) |> ignore;
 
       expect.mock(subscribeMock).toBeCalledTimes(4);
+
+      unsubscribe();
+
+      Router.redirect(Home) |> ignore;
+
+      expect.mock(subscribeMock).toBeCalledTimes(4);
+
       ();
     });
 
